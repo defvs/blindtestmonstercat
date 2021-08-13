@@ -11,26 +11,21 @@ import io.kvision.panel.root
 import io.kvision.require
 import io.kvision.startApplication
 
-class App : Application() {
-
-    override fun start(state: Map<String, Any>) {
-        I18n.manager =
-            DefaultI18nManager(
-                mapOf(
-                    "en" to require("i18n/messages-en.json"),
-                    "pl" to require("i18n/messages-pl.json")
-                )
-            )
-
-        val root = root("kvapp") {
-        }
-        GlobalScope.launch {
-            val pingResult = Model.ping("Hello world from client!")
-            root.add(Span(pingResult))
-        }
-    }
+class App: Application() {
+	
+	override fun start(state: Map<String, Any>) {
+		I18n.manager =
+			DefaultI18nManager(
+				mapOf(
+					"en" to require("i18n/messages-en.json"),
+					"pl" to require("i18n/messages-pl.json")
+				)
+			)
+		
+		val root = root("kvapp") {}
+	}
 }
 
 fun main() {
-    startApplication(::App, module.hot)
+	startApplication(::App, module.hot)
 }
