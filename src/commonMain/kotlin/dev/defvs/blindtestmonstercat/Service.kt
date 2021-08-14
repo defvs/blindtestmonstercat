@@ -5,18 +5,7 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.serialization.Serializable
 
-/**
- * [tracksPerPlayer] times [totalRounds] give the total tracks played.
- *
- * @param maxPlayers Maximum amount of players in the game.
- */
-@Serializable
-data class GameSettings(
-	val maxPlayers: Int,
-	val totalRounds: Int,
-	val tracksPerPlayer: Int,
-	val guessDuration: Int,
-)
+
 
 @KVService
 interface IGameService {
@@ -40,5 +29,5 @@ interface IGameService {
 	suspend fun setGameSettings(gameID: Int, settings: GameSettings): Boolean
 	
 	// input = going to server. output = going to client.
-	suspend fun socketConnection(input: ReceiveChannel<ClientGameMessage>, output: SendChannel<ServerGameMessage>)
+	suspend fun socketConnection(input: ReceiveChannel<ClientGameMessage>, output: SendChannel<ServerGameMessage>) {}
 }

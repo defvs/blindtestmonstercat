@@ -1,15 +1,17 @@
 package dev.defvs.blindtestmonstercat
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import io.kvision.Application
-import io.kvision.html.Span
 import io.kvision.i18n.DefaultI18nManager
 import io.kvision.i18n.I18n
 import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.require
 import io.kvision.startApplication
+import kotlinx.browser.window
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.asCoroutineDispatcher
+
+val AppScope = CoroutineScope(window.asCoroutineDispatcher())
 
 class App: Application() {
 	
@@ -18,7 +20,6 @@ class App: Application() {
 			DefaultI18nManager(
 				mapOf(
 					"en" to require("i18n/messages-en.json"),
-					"pl" to require("i18n/messages-pl.json")
 				)
 			)
 		
