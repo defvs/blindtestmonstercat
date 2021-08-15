@@ -6,6 +6,7 @@ data class Game(
 	val settings: GameSettings,
 	val rounds: ArrayList<GameRound>,
 	val players: ArrayList<String>,
+	val activePlayers: ArrayList<String>,
 ) {
 	fun getAllTotalScores() = players.associateWith { getTotalScore(it) }
 	fun getTotalScore(player: String) = rounds.sumOf { round -> round.getTotalScore(player) }
@@ -14,19 +15,19 @@ data class Game(
 /**
  * @param maxPlayers Maximum amount of players in the game
  * @param roundsPerPlayer
- * @param roundLength Number of tracks per round
+ * @param tracksPerRound Number of tracks per round
  * @param guessDuration in seconds
  */
 @Serializable
 data class GameSettings(
 	val maxPlayers: Int,
 	val roundsPerPlayer: Int,
-	val roundLength: Int,
+	val tracksPerRound: Int,
 	val guessDuration: Int,
 )
 
 data class GameRound(
-	val roundLength: Int,
+	val roundAdmin: String,
 ) {
 	val tracks = ArrayList<String>()
 	val scores = ArrayList<HashMap<String, Int>>()

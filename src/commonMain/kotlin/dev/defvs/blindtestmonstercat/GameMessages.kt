@@ -9,7 +9,7 @@ enum class ClientGameMessageType {
 	SendAnswer,
 	SendChosenTrack,
 	SendScore,
-	GetScores,
+	GetGame,
 }
 
 @Serializable

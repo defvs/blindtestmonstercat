@@ -1,6 +1,5 @@
 package dev.defvs.blindtestmonstercat
 
-import io.kvision.state.observableListOf
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -40,4 +39,8 @@ object Model {
 	suspend fun handleInboundMessage(message: ServerGameMessage) {
 	
 	}
+	
+	suspend fun getGame(owner: String) =
+		username?.let { outboundMessages.send(ClientGameMessage(it, ClientGameMessageType.GetGame, owner)) }
+			?: throw UserNotSetException()
 }
