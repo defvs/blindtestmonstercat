@@ -7,13 +7,16 @@ import kotlinx.serialization.Serializable
  * An instance of a game. Contains settings, list of rounds, and list of players in the game.
  */
 @Serializable
-class Game(
+data class Game(
 	val settings: GameSettings,
-	val rounds: ArrayList<GameRound>,
+	val rounds: ArrayList<Round>,
 	val players: ArrayList<Player>,
 ) {
 	fun getAllTotalScores() = players.associateWith { getTotalScore(it) }
 	fun getTotalScore(player: Player) = rounds.sumOf { round -> round.answers[player]?.score ?: 0 }
+	
+	val currentRoundAdmin get() = rounds.lastOrNull()?.roundAdmin
+	val nextRoundAdmin get() = players.getOrNull(players.indexOf(currentRoundAdmin))
 }
 
 /**
@@ -61,7 +64,7 @@ data class GameSettings(
  * 	@property answers All the [RoundAnswer]s in this round. Contains both the answer as a [String] and the score given (`null` or [0..2])
  */
 @Serializable
-class GameRound(
+data class Round(
 	val roundAdmin: Player,
 ) {
 	val trackID: String? = null
@@ -70,7 +73,7 @@ class GameRound(
 }
 
 /**
- * An answer in a [GameRound].
+ * An answer in a [Round].
  *
  * @param answer Answer as a [String] given.
  * @param score Score as a nullable [Int?], with `null` corresponding to "no score chosen yet", and [0..2] corresponding to the score chosen.

@@ -31,7 +31,7 @@ enum class ClientGameMessageType {
 	GetGame,
 	
 	/**
-	 * Request current [GameRound] object again for re-sync purposes.
+	 * Request current [Round] object again for re-sync purposes.
 	 *
 	 * __Payload__: Payload ignored. Send `null`
 	 */
@@ -83,7 +83,7 @@ enum class ServerGameMessageType {
 	 * 		after server receives [ClientGameMessageType.SendChosenTrack],
 	 * 		2 seconds after server sends [RoundGuessEnd].
 	 *
-	 * __Payload__: A json-serialized [GameRound] object
+	 * __Payload__: A json-serialized [Round] object
 	 */
 	Round,
 	
